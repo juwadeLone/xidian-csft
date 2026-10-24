@@ -1,0 +1,44 @@
+{
+ "ts": "2026-10-23T11:27:50.506603",
+ "bit": "C:\\hermes\\taes\\2048-2048cs-k7-sem_low_ub16\\chain\\build\\arms_ext\\GR17M1A\\k7_udp_ddr_top.bit",
+ "bit_sha256": "49a8bfabf5b1ed2b07e8a8393cdd89b351a2026cdc37ad5ea8499c4be9284a0a",
+ "ebd": "C:\\hermes\\taes\\2048-2048cs-k7-sem_low_ub16\\chain\\build\\arms_ext\\GR17M1A\\k7_udp_ddr_top.ebd",
+ "ebd_sha256": "f1f40512d6a5f27a5793c8196e5fc05eab42669f967e0d9f5bf37387448c7d30",
+ "expect_vec_id": "none",
+ "golden": {
+  "point": {
+   "file": "C:\\hermes\\taes\\2048-2048cs-k7-sem_low_ub16\\chain\\build\\arms_ext\\W17\\golden\\golden_w17_point_frame0.bin",
+   "sha256": "79ca5c05a217e6e0be684ffd2d8a23a325ce909bb3cf6f40d157f2c510a0056c"
+  },
+  "gf3": {
+   "file": "C:\\hermes\\taes\\2048-2048cs-k7-sem_low_ub16\\chain\\build\\arms_ext\\W17\\golden\\golden_w17_gf3_frame0.bin",
+   "sha256": "3a794a1ad520ff8f8fca00634e6ca474e9b3dd11480b5d595a0c437ff4948d86"
+  }
+ },
+ "batches": [
+  {
+   "name": "e0_point",
+   "targets": "C:\\hermes\\taes\\2048-2048cs-k7-sem_low_ub16\\chain\\build\\arms_ext\\GR17M1A\\sampled\\targets_e0.json",
+   "targets_sha256": "32336bf0ab251301d389a168a06ed3d12c78735926414eaa0fe04a16024ce5fc",
+   "scene": "point"
+  },
+  {
+   "name": "control",
+   "targets": "C:\\hermes\\taes\\2048-2048cs-k7-sem_low_ub16\\chain\\build\\arms_ext\\GR17M1A\\sampled\\targets_control.json",
+   "targets_sha256": "0c59317e0b55ff8630b90d496f77ff4315421c1c1dfad78472d795f76fe4a5d0",
+   "scene": "point"
+  }
+ ],
+ "post_health_every": 50,
+ "keep_changed": 3,
+ "input_check": "write",
+ "write_pace": "busy150",
+ "scripts": {
+  "cram_shot.py": "2604c398b5700e7f57bd1a2b724d6a9c4bd7932630d3ee29643ee5d64e5b97cf",
+  "cram_grade.py": "891bef0dd4281a2755af9f03f0eeec06232d0eedf4105536e2dbac4eee4e5e42",
+  "cram_runner.py": "235ec6e9f1459a019f72e88641bb3c5f91bce03a0e8f17d54bbc7b66ae2e24a2",
+  "k7_sem_common.py": "8ce0ff3bb57956a4b58a49d4b268e72197ba5bde3d1f9b9e05e2431dd657b0fb",
+  "bare_chain_run.py": "ee12db7da9efd1c139f436a3a56f4100b3b9b59e8a309b0547d78df4a54b2e16",
+  "program_k7_volatile.tcl": "68771a778f4423093523f0a253d2317ad1a0039305e2721ac39aae6f8c52a1d4"
+ }
+}

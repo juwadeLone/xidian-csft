@@ -1,0 +1,34 @@
+e0: 1200
+e0_gf3: 1000
+control: 60
+{
+ "seed": 20261014,
+ "e0": 1200,
+ "e0_gf3": 1000,
+ "control": 60,
+ "census": {
+  "essential_bits": 28399800,
+  "by_label": {
+   "processor": 23115821,
+   "left_out_zone": 5266972,
+   "unmapped_no_column": 17007
+  },
+  "not_addressable_or_dead": 555,
+  "population_e0": 23132273,
+  "left_out_columns": 109,
+  "left_out_columns_by_zone_reason": {
+   "zone 1 area": 71,
+   "zone 0 area": 19,
+   "zone 1 cells": 13,
+   "zone 0 cells": 6
+  },
+  "zone_nets_columns_kept": 79,
+  "population_bits_in_zone_nets_columns": 3513254
+ },
+ "condition_5_targets_in_left_out_columns": 0,
+ "e0_labels": {
+  "processor": 1199,
+  "unmapped_no_column": 1
+ },
+ "e0_in_zone_nets_columns": 171
+}

@@ -1,0 +1,92 @@
+{
+ "camp": "C:\\hermes\\taes\\2048-2048cs-k7-sem_low_ub16\\chain\\build\\cram\\GR17M1A_20261023",
+ "pool": 21853591,
+ "batches": {
+  "e0_point": {
+   "records": 1200,
+   "identical": 1105,
+   "changed": 77,
+   "DUE": 10,
+   "below_line": 8,
+   "valid": 1200,
+   "sem_uncorrectable_after": [
+    427,
+    448
+   ],
+   "invalid_shots": []
+  },
+  "control": {
+   "records": 60,
+   "identical": 55,
+   "invalid": 5,
+   "valid": 55,
+   "sem_uncorrectable_after": [],
+   "invalid_shots": [
+    [
+     1,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     8,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     10,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     16,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     19,
+     "INVALID_NO_DETECT"
+    ]
+   ]
+  }
+ },
+ "rates": {
+  "below_line": {
+   "k": 8,
+   "n": 1200,
+   "share": 0.006666666666666667,
+   "share_ci": [
+    0.0033818710025124723,
+    0.013100031599956157
+   ],
+   "xsec": 145690.6066666667,
+   "xsec_ci": [
+    73906.02570366755,
+    286282.7326725175
+   ]
+  },
+  "DUE": {
+   "k": 10,
+   "n": 1200,
+   "share": 0.008333333333333333,
+   "share_ci": [
+    0.00453269096958185,
+    0.01527190790787844
+   ],
+   "xsec": 182113.25833333333,
+   "xsec_ci": [
+    99055.5745786352,
+    333746.0292084411
+   ]
+  },
+  "changed": {
+   "k": 77,
+   "n": 1200,
+   "share": 0.06416666666666666,
+   "share_ci": [
+    0.051644924470574095,
+    0.0794699996191068
+   ],
+   "xsec": 1402272.0891666666,
+   "xsec_ci": [
+    1128627.0566058178,
+    1736704.8684461156
+   ]
+  }
+ }
+}

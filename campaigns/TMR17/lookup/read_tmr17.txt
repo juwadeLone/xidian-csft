@@ -1,0 +1,77 @@
+====================================================================================================
+shot 81 lut CLBLM_R_X53Y230 X1.A
+  LUT A6LUT u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p1/u_post_compensation/u_compensator/u_coeff/u_cordic/gen_iter[11].u_iter/y_out[15]_i_5__32 LUT3 8'h96
+  physical INIT[61] -> logical index 3, value 0; inputs:
+      I0(A3,u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p1/u_post_compensation/u_compensator/u_coeff/u_cordic/gen_iter[11].u_iter/y[12]_145[12])=1
+      I1(A6,u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p1/u_post_compensation/u_compensator/u_coeff/u_cordic/gen_iter[11].u_iter/x[12]_144[24])=1
+      I2(A2,u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p1/u_post_compensation/u_compensator/u_coeff/u_cordic/gen_iter[11].u_iter/z_out_reg[31]_0)=0
+  output {O@u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p1/u_post_compensation/u_compensator/u_coeff/u_cordic/gen_iter[11].u_iter/y_out[15]_i_5__32_n_0}
+====================================================================================================
+shot 433 route INT_L_X74Y327 IMUX_L45
+  wire net: {}
+  no net uses this mux output; switches whose pattern the flip would complete: []
+====================================================================================================
+shot 434 lut CLBLM_L_X34Y243 X1.D
+====================================================================================================
+shot 435 lut CLBLL_L_X68Y39 X0.B
+  LUT B6LUT u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p3/g_sdf.u_fft/u_core/g_sdf_stage[8].u_stage/g_general_rotator.u_rotator/acc_re_2[41]_i_1__8 LUT5 32'hB8BBB888
+  physical INIT[16] -> logical index 0, value 0; inputs:
+      I0(A2,u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p3/g_sdf.u_fft/u_core/g_sdf_stage[8].u_stage/g_general_rotator.u_rotator/quarter_re_1[41])=0
+      I1(A4,u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p3/g_sdf.u_fft/u_core/g_sdf_stage[8].u_stage/g_general_rotator.u_rotator/exact_quarter_1)=0
+      I2(A3,u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p3/g_sdf.u_fft/u_core/g_sdf_stage[8].u_stage/g_general_rotator.u_rotator/acc_re_22_n_64)=0
+      I3(A6,u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p3/g_sdf.u_fft/u_core/g_sdf_stage[8].u_stage/g_general_rotator.u_rotator/do_twiddle_1)=0
+      I4(A1,u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p3/g_sdf.u_fft/u_core/g_sdf_stage[8].u_stage/g_general_rotator.u_rotator/bypass_re_1[43])=0
+  output {O@u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p3/g_sdf.u_fft/u_core/g_sdf_stage[8].u_stage/g_general_rotator.u_rotator/acc_re_2[41]_i_1__8_n_0}
+====================================================================================================
+shot 826 route INT_L_X16Y190 NN2BEG1
+  wire net: {u_core/u_cs_axi_cdc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.mem/goreg_dm.dout_i_reg[262]_0[45]}
+  in use: NL1END1 | bit 06_19 is 0 | active before ['NL1END1'] after ['NL1END1', 'WL1END0']
+   after the flip the wire is driven from WL1END0 -> {u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p3/g_sdf.u_fft/u_core/g_sdf_stage[2].u_stage/g_general_rotator.u_rotator/acc_re_22_n_62}
+  net driver {u_core/u_cs_axi_cdc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.mem/goreg_dm.dout_i_reg[45]}
+  reaches 10 cell inputs downstream:
+      ('SLICE_X108Y259', 'C3', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_p1/u_reader/data_q[42]_i_1__1', 'I2')
+      ('SLICE_X119Y246', 'C5', 'u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p6/u_reader/data_q[42]_i_1__2', 'I3')
+      ('SLICE_X22Y192', 'B2', 'u_core/u_cs_app/g_rep[1].u_rep/u_score/u_reader/fold[42]_i_1', 'I2')
+      ('SLICE_X38Y257', 'C3', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_p4/u_reader/data_q[42]_i_1__3', 'I3')
+      ('SLICE_X49Y212', 'C4', 'u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p1/u_reader/data_q[42]_i_1__1', 'I2')
+      ('SLICE_X51Y255', 'C2', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_p6/u_reader/data_q[42]_i_1__2', 'I3')
+      ('SLICE_X61Y255', 'A6', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_swap/u_reader/data_q[42]_i_1', 'I3')
+      ('SLICE_X67Y251', 'B6', 'u_core/u_cs_app/g_rep[0].u_rep/u_score/u_reader/fold[42]_i_1', 'I2')
+      ('SLICE_X88Y260', 'C3', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_p3/u_reader/data_q[42]_i_1__0', 'I1')
+      ('SLICE_X99Y232', 'C3', 'u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p4/u_reader/data_q[42]_i_1__3', 'I3')
+====================================================================================================
+shot 1080 route INT_L_X74Y108 EL1BEG0
+  wire net: {u_axi_cdc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.mem/goreg_dm.dout_i_reg[262]_0[144]}
+  in use: NL1END1 | bit 08_20 is 1 (set by this switch) | active before ['NL1END1'] after []
+  net driver {u_axi_cdc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.mem/goreg_dm.dout_i_reg[144]}
+  reaches 1 cell inputs downstream:
+      ('SLICE_X122Y108', 'AI', 'u_core/u_cs_axi_cdc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.mem/gdm.dm_gen.dm/RAM_reg_0_15_144_149/RAMA', 'I')
+====================================================================================================
+shot 1145 route INT_R_X59Y231 NN2BEG1
+  wire net: {u_core/u_cs_axi_cdc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.mem/goreg_dm.dout_i_reg[262]_0[200]}
+  in use: NN6END1 | bit 14_18 is 0 | active before ['NN6END1'] after ['NN2END1', 'NN6END1']
+   after the flip the wire is driven from NN2END1 -> {u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p4/u_unpack/data_q[240]_i_1__1_n_0}
+  net driver {u_core/u_cs_axi_cdc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.mem/goreg_dm.dout_i_reg[200]}
+  reaches 8 cell inputs downstream:
+      ('SLICE_X107Y248', 'B3', 'u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p6/u_reader/data_q[197]_i_1__6', 'I3')
+      ('SLICE_X109Y254', 'B2', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_swap/u_reader/data_q[197]_i_1__0', 'I3')
+      ('SLICE_X109Y267', 'B5', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_p3/u_reader/data_q[197]_i_1__4', 'I1')
+      ('SLICE_X111Y267', 'B2', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_p1/u_reader/data_q[197]_i_1__5', 'I2')
+      ('SLICE_X42Y254', 'B4', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_p4/u_reader/data_q[197]_i_1__7', 'I3')
+      ('SLICE_X46Y261', 'A6', 'u_core/u_cs_app/g_rep[0].u_rep/u_dut/u_p6/u_reader/data_q[197]_i_1__6', 'I3')
+      ('SLICE_X79Y250', 'C5', 'u_core/u_cs_app/g_rep[0].u_rep/u_score/u_reader/fold[5]_i_1', 'I3')
+      ('SLICE_X98Y232', 'B4', 'u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p4/u_reader/data_q[197]_i_1__7', 'I3')
+====================================================================================================
+shot 1147 route INT_R_X41Y191 SW6BEG2
+  wire net: {u_core/u_cs_axi_cdc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.mem/goreg_dm.dout_i_reg[262]_0[70]}
+  in use: SW6END2 | bit 03_44 is 0 | active before ['SW6END2'] after ['SS2END2', 'SW6END2']
+   after the flip the wire is driven from SS2END2 -> {u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p6/g_sdf.u_fft/u_core/g_sdf_stage[0].u_stage/phase_reg[8]}
+  net driver {u_core/u_cs_axi_cdc/inst/gen_clock_conv.gen_async_conv.asyncfifo_axi/inst_fifo_gen/gaxi_full_lite.gread_ch.grdch2.axi_rdch/grf.rf/gntv_or_sync_fifo.mem/goreg_dm.dout_i_reg[70]}
+  reaches 7 cell inputs downstream:
+      ('SLICE_X113Y49', 'A3', 'u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p3/u_reader/data_q[67]_i_1__0', 'I1')
+      ('SLICE_X53Y45', 'C3', 'u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p6/u_reader/data_q[67]_i_1__2', 'I3')
+      ('SLICE_X60Y180', 'C3', 'u_core/u_cs_app/g_rep[1].u_rep/u_dut/u_p1/u_reader/data_q[67]_i_1__1', 'I2')
+      ('SLICE_X62Y95', 'C5', 'u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_swap/u_reader/data_q[67]_i_1', 'I3')
+      ('SLICE_X67Y46', 'C4', 'u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p1/u_reader/data_q[67]_i_1__1', 'I2')
+      ('SLICE_X70Y148', 'B3', 'u_core/u_cs_app/g_rep[2].u_rep/u_score/u_reader/fold[3]_i_1', 'I1')
+      ('SLICE_X90Y45', 'C3', 'u_core/u_cs_app/g_rep[2].u_rep/u_dut/u_p4/u_reader/data_q[67]_i_1__3', 'I3')
