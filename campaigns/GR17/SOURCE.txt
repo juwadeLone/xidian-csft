@@ -1,0 +1,10 @@
+lab commit:      8611574e4ec16d074bbf83f75b7c0b0d7f7e282d
+TASK.md sha256:  54c23f03fba3ecadede5456832b45905c0e9bb9720a56d2ff2f04a37d98f06ae
+
+ub16 checkout:   46285269e15c18276d20168ccb063f80c0e2bf42
+w17 checkout:    1e9acb3a2421ed8e33591fa61d37b893d6521579
+
+gr17 build src:  0e1372e039124bcf86f4cdbf29e1db8b70852cc7 (bitstream built from this)
+
+work dir:        /home/xdu/l/gr17fix-cram
+campaign dir:    results/20261021-gr17fix-cram/camp/GR17_20261021

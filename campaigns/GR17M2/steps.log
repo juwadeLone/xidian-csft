@@ -1,0 +1,8 @@
+2026-10-22T04:09:32Z start; ub16 46285269e15c18276d20168ccb063f80c0e2bf42; w17 1e9acb3a2421ed8e33591fa61d37b893d6521579; port /dev/ttyACM0; vivado /tools/Xilinx/Vivado/2018.3/bin/vivado
+2026-10-22T04:10:57Z cram_pre_GR17M2 rc=0: PASS: 3 point + 3 GF-3 frame(s) equal the frozen SHA-256
+2026-10-22T04:10:57Z cram_pre_GR17M2 reprogram retries: 0
+2026-10-22T04:10:57Z campaign start
+2026-10-22T08:55:27Z campaign runner rc=0
+2026-10-22T08:57:22Z cram_post_GR17M2 rc=0: PASS: 3 point + 3 GF-3 frame(s) equal the frozen SHA-256
+2026-10-22T08:57:22Z cram_post_GR17M2 reprogram retries: 0
+2026-10-22T08:57:22Z DONE

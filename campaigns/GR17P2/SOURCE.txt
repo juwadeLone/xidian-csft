@@ -1,0 +1,11 @@
+lab        task commit c347167 (pulled at start).  TASK.md sha256 8e7cb4ef22585aa5e2ffdbbd724146d0bc6659b7f925c70408852c7ddf02509c
+ub16       ~/l/w17-cram/ub16  git rev-parse HEAD: 46285269e15c18276d20168ccb063f80c0e2bf42
+           git status --short: (empty)
+w17        ~/l/w17-cram/w17   git rev-parse HEAD: 1e9acb3a2421ed8e33591fa61d37b893d6521579
+           git status --short: (empty)
+build      results/20261022-gr17p2-build (gr17p2 615f37d): .bit de2185d373b3ce5654a004d01672671beb409641bcedd9e66ae50c126eb69429,
+           .ebd fb2c14bb6c9d5b1343b7198963559af8a3c2b8827cb8c7fcdc2d033ef2839633, USR_ACCESS b534d034, PROT_VEC_ID 4befc553
+targets    tasks/20261022-gr17p2-cram/targets: targets_e0.json a8bb9ea3c94450b4..., targets_control.json 18d6741cc14d34b5..., pool 27,481,825
+lookup dcp /home/xdu/l/gr17p2/chain/build/snap/GR17P2/build/vivado/PROT_GR17P2/PROT_GR17P2.runs/impl_1/k7_udp_ddr_top_routed.dcp
+           sha256 af9011fd3d6786a768cc2e14ed5e6f0239fe8e5459dc2546395363f9623a7b40 (opened read-only)
+tool       Vivado v2018.3 (64-bit) SW Build 2405991; Python 3.10.12; Ubuntu 22.04.5 LTS, kernel 6.8.0-136-generic

@@ -1,0 +1,44 @@
+# 20261022-gr17b-cram -- commands actually run (host cmp; LAB=/home/xdu/JuWade_research/2048-2048cs-k7-sem_low; S=/home/xdu/l/gr17b-cram)
+cd $LAB && git pull --ff-only origin lab                                   # -> 3420c7e
+sha256sum tasks/20261022-gr17b-cram/TASK.md                                # 41634c93849bfa74...
+(cd tasks/20261022-gr17b-cram && sha256sum -c MANIFEST.sha256)             # 16 files OK
+
+# 0. checkouts + data
+git -C ~/l/w17-cram/ub16 rev-parse HEAD                                    # 46285269e15c18276d20168ccb063f80c0e2bf42 (clean)
+git -C ~/l/w17-cram/w17  rev-parse HEAD                                    # 1e9acb3a2421ed8e33591fa61d37b893d6521579 (clean)
+python3 $LAB/tasks/20261022-gr17b-cram/setup_data.py $LAB/tasks/20261022-gr17b-cram ~/l/w17-cram/ub16 ~/l/w17-cram/w17 \
+        $LAB/results/20261021-gr17b-build/build3_7ae89e3 $S/work          # SETUP OK, pool 26447347
+
+# s4 environment
+python3 --version; python3 -c "import numpy, scapy, serial"
+ls -la /dev/ttyACM0; ip -4 addr show enp4s0; getcap /usr/bin/python3.10
+sysctl net.core.rmem_max                                                   # 33554432 before; no change made
+systemctl list-timers --all                                                # apt-daily.timer next 02:37:44 CST (inside the window) -> reported
+# (user ran) sudo systemctl stop apt-daily.timer apt-daily-upgrade.timer   # 2026-10-21T17:31:34Z
+systemctl list-timers --all 'apt-daily*'; systemctl is-active apt-daily.timer apt-daily-upgrade.timer apt-daily.service apt-daily-upgrade.service
+
+# 0b. bit-consistency check
+mkdir -p $S/check0
+cd ~/l/w17-cram/w17 && python3 -B chain/host/bare_chain_run.py --bit $S/work/arm/k7_udp_ddr_top.bit --port /dev/ttyACM0 \
+    --vivado /tools/Xilinx/Vivado/2018.3/bin/vivado --point 2 --gf3 2 --tag gr17b_lab --save-readback \
+    --out-dir $S/check0 > $S/check0/gr17b_lab.console.log 2>&1;  echo "rc=$?"     # rc=0
+grep -c "programming again" $S/check0/gr17b_lab.console.log                     # 0
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -nolog \
+    -source $LAB/tasks/20261022-gr17b-cram/read_usr_access.tcl > $S/check0/usr_access.log 2>&1
+grep "^K7_USR_ACCESS " $S/check0/usr_access.log                                 # K7_USR_ACCESS b534019d
+sha256sum $S/check0/bare_chain_run_gr17b_lab_*_frame*.bin > $S/check0/frames.sha256
+
+# 1-4. no-fault check -> campaign -> no-fault check -> summary
+cd $S && PORT=/dev/ttyACM0 VIVADO=/tools/Xilinx/Vivado/2018.3/bin/vivado \
+nohup bash $LAB/tasks/20261022-gr17b-cram/run_gr17b_cram.sh ~/l/w17-cram/ub16 ~/l/w17-cram/w17 $S/work \
+      $LAB/results/20261022-gr17b-cram > $S/run_gr17b_cram.nohup.log 2>&1 &      # copied here as nohup.log
+
+# 5. read-only tile lookup
+D=/home/xdu/l/gr17/chain/build/snap/GR17B/build/vivado/PROT_GR17B/PROT_GR17B.runs/impl_1/k7_udp_ddr_top_routed.dcp
+sha256sum $D                                                                    # c77d1dbfa27d2a69cd4bf891148566c48c4b5461b583d350b3669d62b5779034
+cd $LAB/results/20261022-gr17b-cram && mkdir -p lookup && cd lookup
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -log lookup.log \
+  -source $LAB/tasks/20261022-gr17b-cram/tile_lookup.tcl -tclargs $D ../summary/shots.csv lookup.tsv   # TILE_LOOKUP done: 7 shots
+
+# cleanup of Vivado scratch created in the result tree by these runs
+rm -rf camp/GR17B_20261022/.Xil checks/.Xil lookup/hd_visual lookup/.Xil

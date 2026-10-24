@@ -1,0 +1,44 @@
+# 20261022-gr17p2-cram -- commands actually run (host cmp; LAB=/home/xdu/JuWade_research/2048-2048cs-k7-sem_low; S=/home/xdu/l/gr17p2-cram)
+cd $LAB && git pull origin lab                                              # -> c347167
+sha256sum tasks/20261022-gr17p2-cram/TASK.md                               # 8e7cb4ef22585aa5...
+(cd tasks/20261022-gr17p2-cram && sha256sum -c MANIFEST.sha256)            # 16 files OK
+
+# s4 environment
+systemctl list-timers apt-daily.timer apt-daily-upgrade.timer             # "0 timers listed." (both inactive)
+systemctl list-timers --all apt-daily.timer apt-daily-upgrade.timer       # NEXT n/a for both
+python3 --version; python3 -c "import numpy, scapy, serial"
+ls -la /dev/ttyACM0; ip -4 addr show enp4s0; getcap /usr/bin/python3.10
+cat /proc/sys/net/core/rmem_max                                            # 33554432 before; no change made
+pgrep -af hw_server                                                        # 2018.3 hw_server running, single xc7k325t (checked via step 0b JTAG read)
+
+# 0. checkouts + data
+git -C ~/l/w17-cram/ub16 rev-parse HEAD                                    # 46285269e15c18276d20168ccb063f80c0e2bf42 (clean)
+git -C ~/l/w17-cram/w17  rev-parse HEAD                                    # 1e9acb3a2421ed8e33591fa61d37b893d6521579 (clean)
+python3 $LAB/tasks/20261022-gr17p2-cram/setup_data.py $LAB/tasks/20261022-gr17p2-cram ~/l/w17-cram/ub16 ~/l/w17-cram/w17 \
+        $LAB/results/20261022-gr17p2-build $S/work                        # SETUP OK, pool 27481825
+
+# 0b. bit-consistency check
+mkdir -p $S/check0
+cd ~/l/w17-cram/w17 && python3 -B chain/host/bare_chain_run.py --bit $S/work/arm/k7_udp_ddr_top.bit --port /dev/ttyACM0 \
+    --vivado /tools/Xilinx/Vivado/2018.3/bin/vivado --point 2 --gf3 2 --tag gr17p2_lab --save-readback \
+    --out-dir $S/check0 > $S/check0/gr17p2_lab.console.log 2>&1;  echo "rc=$?"   # rc=0
+grep -c "programming again" $S/check0/gr17p2_lab.console.log                   # 0
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -nolog \
+    -source $LAB/tasks/20261022-gr17p2-cram/read_usr_access.tcl > $S/check0/usr_access.log 2>&1
+grep "^K7_USR_ACCESS " $S/check0/usr_access.log                               # K7_USR_ACCESS b534d034
+sha256sum $S/check0/bare_chain_run_gr17p2_lab_*_frame*.bin > $S/check0/frames.sha256
+
+# 1-4. no-fault check -> campaign -> no-fault check -> summary
+cd $S && PORT=/dev/ttyACM0 VIVADO=/tools/Xilinx/Vivado/2018.3/bin/vivado \
+nohup bash $LAB/tasks/20261022-gr17p2-cram/run_gr17p2_cram.sh ~/l/w17-cram/ub16 ~/l/w17-cram/w17 $S/work \
+      $LAB/results/20261022-gr17p2-cram > $S/run_gr17p2_cram.nohup.log 2>&1 &    # copied here as nohup.log
+
+# 5. read-only tile lookup
+D=/home/xdu/l/gr17p2/chain/build/snap/GR17P2/build/vivado/PROT_GR17P2/PROT_GR17P2.runs/impl_1/k7_udp_ddr_top_routed.dcp
+sha256sum $D                                                                  # af9011fd3d6786a768cc2e14ed5e6f0239fe8e5459dc2546395363f9623a7b40
+cd $LAB/results/20261022-gr17p2-cram && mkdir -p lookup && cd lookup
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -log lookup.log \
+  -source $LAB/tasks/20261022-gr17p2-cram/tile_lookup.tcl -tclargs $D ../summary/shots.csv lookup.tsv   # TILE_LOOKUP done: 17 shots
+
+# cleanup of Vivado scratch created in the result tree by these runs
+rm -rf lookup/hd_visual camp/GR17P2_20261022/.Xil checks/.Xil lookup/.Xil

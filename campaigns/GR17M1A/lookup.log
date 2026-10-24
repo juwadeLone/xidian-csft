@@ -1,0 +1,96 @@
+#-----------------------------------------------------------
+# Vivado v2018.3 (64-bit)
+# SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
+# IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+# Start of session at: Fri Oct 23 18:06:54 2026
+# Process ID: 1278147
+# Current directory: /home/xdu/JuWade_research/2048-2048cs-k7-sem_low/results/20261023-gr17m1a-lookup
+# Command line: vivado -mode batch -nojournal -log lookup.log -source /home/xdu/JuWade_research/2048-2048cs-k7-sem_low/tasks/20261023-gr17m1a-lookup/tile_lookup.tcl -tclargs /home/xdu/l/gr17m1a/chain/build/snap/GR17M1A/build/vivado/PROT_GR17M1A/PROT_GR17M1A.runs/impl_1/k7_udp_ddr_top_routed.dcp /home/xdu/JuWade_research/2048-2048cs-k7-sem_low/tasks/20261023-gr17m1a-lookup/shots_gr17m1a.csv lookup.tsv
+# Log file: /home/xdu/JuWade_research/2048-2048cs-k7-sem_low/results/20261023-gr17m1a-lookup/lookup.log
+# Journal file: 
+#-----------------------------------------------------------
+source /home/xdu/JuWade_research/2048-2048cs-k7-sem_low/tasks/20261023-gr17m1a-lookup/tile_lookup.tcl
+# set dcp [lindex $argv 0];
+# set shots [lindex $argv 1];
+# set out [lindex $argv 2]
+# open_checkpoint $dcp
+Command: open_checkpoint /home/xdu/l/gr17m1a/chain/build/snap/GR17M1A/build/vivado/PROT_GR17M1A/PROT_GR17M1A.runs/impl_1/k7_udp_ddr_top_routed.dcp
+
+Starting open_checkpoint Task
+
+Time (s): cpu = 00:00:00.02 ; elapsed = 00:00:00.03 . Memory (MB): peak = 1357.988 ; gain = 0.000 ; free physical = 99417 ; free virtual = 384714
+INFO: [Netlist 29-17] Analyzing 22308 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2018.3
+INFO: [Device 21-403] Loading part xc7k325tffg900-2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Timing 38-478] Restoring timing data from binary archive.
+INFO: [Timing 38-479] Binary timing data restore complete.
+INFO: [Project 1-856] Restoring constraints from binary archive.
+INFO: [Project 1-853] Binary constraint restore complete.
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 3261.824 ; gain = 275.414 ; free physical = 93788 ; free virtual = 379108
+Restored from archive | CPU: 5.390000 secs | Memory: 268.386032 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 3261.824 ; gain = 275.414 ; free physical = 93788 ; free virtual = 379108
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3261.824 ; gain = 0.000 ; free physical = 96102 ; free virtual = 381423
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1270 instances were transformed.
+  IOBUFDS_DIFF_OUT_DCIEN => IOBUFDS_DIFF_OUT_DCIEN (IBUFDS_IBUFDISABLE_INT, IBUFDS_IBUFDISABLE_INT, INV, OBUFTDS_DCIEN, OBUFTDS_DCIEN): 8 instances
+  IOBUF_DCIEN => IOBUF_DCIEN (IBUF_IBUFDISABLE, OBUFT_DCIEN): 64 instances
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 19 instances
+  OBUFDS => OBUFDS_DUAL_BUF (INV, OBUFDS, OBUFDS): 1 instances
+  RAM16X1D => RAM32X1D (RAMD32, RAMD32): 8 instances
+  RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 735 instances
+  RAM32X1S => RAM32X1S (RAMS32): 10 instances
+  RAM64M => RAM64M (RAMD64E, RAMD64E, RAMD64E, RAMD64E): 354 instances
+  RAM64X1D => RAM64X1D (RAMD64E, RAMD64E): 46 instances
+  RAM64X1S => RAM64X1S (RAMS64E): 8 instances
+  SRLC32E => SRL16E: 17 instances
+
+INFO: [Project 1-604] Checkpoint was created with Vivado v2018.3 (64-bit) build 2405991
+open_checkpoint: Time (s): cpu = 00:00:25 ; elapsed = 00:00:29 . Memory (MB): peak = 3261.824 ; gain = 1903.836 ; free physical = 96105 ; free virtual = 381427
+# set fh [open $shots r];
+# set hdr [split [gets $fh] ,];
+# set rows {}
+# while {[gets $fh line] >= 0} { lappend rows [split $line ,] }
+# close $fh
+# proc col {hdr row name} { return [lindex $row [lsearch -exact $hdr $name]] }
+# set of [open $out w]
+# puts $of "i\torder\tkind\ttile\tname\tref"
+# foreach row $rows {
+#     set i [col $hdr $row i]; set cr [col $hdr $row clock_region]; set x [col $hdr $row tile_x]
+#     set kind [col $hdr $row tile_kind]; set w [col $hdr $row word]
+#     if {$w == 50} { puts $of "$i\t-\tnote\t-\tHCLK word\t-"; continue }
+#     regexp {Y(\d+)$} $cr -> cry
+#     set r [expr {$w < 50 ? $w / 2 : ($w - 1) / 2}]
+#     foreach order {up down} {
+#         set y [expr {50 * $cry + ($order eq "up" ? $r : 49 - $r)}]
+#         set t ""
+#         foreach dy {0 1 2 3 4} {
+#             set t [get_tiles -quiet ${kind}_X${x}Y[expr {$y - $dy}]]
+#             if {$t ne ""} { break }
+#             if {![string match BRAM* $kind] && ![string match DSP* $kind]} { break }
+#         }
+#         if {$t eq ""} { puts $of "$i\t$order\tnote\t-\tno tile ${kind}_X${x}Y$y\t-"; continue }
+#         foreach c [get_cells -quiet -of_objects [get_sites -quiet -of_objects $t]] {
+#             puts $of "$i\t$order\tcell\t$t\t$c\t[get_property REF_NAME $c]"
+#         }
+#         set side [expr {[string match *_L $kind] ? "L" : "R"}]
+#         set it [get_tiles -quiet INT_${side}_X${x}Y$y]
+#         if {$it ne ""} {
+#             if {[catch {set nets [get_nets -quiet -of_objects $it]} err]} {
+#                 puts $of "$i\t$order\tnote\t$it\tget_nets failed: $err\t-"
+#             } else {
+#                 foreach n $nets { puts $of "$i\t$order\tnet\t$it\t$n\t-" }
+#                 puts $of "$i\t$order\tnote\t$it\tnets [llength $nets]\t-"
+#             }
+#         }
+#     }
+#     flush $of
+# }
+# close $of
+# puts "TILE_LOOKUP done: [llength $rows] shots"
+TILE_LOOKUP done: 18 shots
+INFO: [Common 17-206] Exiting Vivado at Fri Oct 23 18:07:34 2026...

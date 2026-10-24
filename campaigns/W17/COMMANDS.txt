@@ -1,0 +1,38 @@
+Commands run for the W17 CRAM task (work dir /home/xdu/l/w17-cram)
+================================================================
+
+# --- workspace setup ---
+S=/home/xdu/l/w17-cram
+mkdir -p $S/ub16 $S/w17 $S/work
+git clone --shared <repo> $S/ub16 && git -C $S/ub16 checkout 4628526  # ub16 @ 46285269
+git clone --shared <repo> $S/w17  && git -C $S/w17  checkout 1e9acb3  # w17  @ 1e9acb3a
+# task assets copied to $S/work: arm/ (bit+ebd), targets/, golden frames
+# SETUP: hash check of bit/ebd/targets/golden -> SETUP OK
+
+# --- env (task §4) ---
+sysctl net.core.rmem_max            # check
+sudo sysctl -w net.core.rmem_max=33554432   # raised per §4 (runtime only)
+
+# --- step 0b: bit identity + USR_ACCESS ---
+python3 $S/ub16/chain/host/scripts/.../bare_chain_run.py ...  # 2+2 frames, flags 0
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -source \
+    tasks/20261020-w17-cram/read_usr_access.tcl   # -> K7_USR_ACCESS a53503e8
+
+# --- campaign (nohup; pre-check -> inject -> post-check -> summary) ---
+cd $S && PORT=/dev/ttyACM0 VIVADO=/tools/Xilinx/Vivado/2018.3/bin/vivado \
+nohup bash tasks/20261020-w17-cram/run_w17_cram.sh $S/ub16 $S/w17 $S/work \
+     results/20261020-w17-cram > $S/run_w17_cram.nohup.log 2>&1 &
+# runner: cram_runner.py --batch e0_point=targets_e0.json:point
+#         --batch control=targets_control.json:point
+#         --golden-point golden_w17_point_frame0.bin
+#         --golden-gf3 golden_w17_gf3_frame0.bin --expect-vec-id none
+#         --input-check write --write-pace busy150 --post-health-every 50
+#         --seed-label 20261014 --port /dev/ttyACM0
+
+# --- read-only site lookup on the routed W17 checkpoint ---
+sha256sum .../impl_1/k7_udp_ddr_top_routed.dcp   # == 948ec7a2...37dc0a
+cd results/20261020-w17-cram/lookup && \
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -log lookup.log \
+  -source tasks/20261020-w17-cram/tile_lookup.tcl \
+  -tclargs /home/xdu/l/w17/chain/build/snap/W17/build/vivado/PROT_U/PROT_U.runs/impl_1/k7_udp_ddr_top_routed.dcp \
+  ../summary/shots.csv lookup.tsv

@@ -1,0 +1,54 @@
+# 20261023-gr17p1-cram -- commands actually run (host cmp; LAB=/home/xdu/JuWade_research/2048-2048cs-k7-sem_low)
+cd $LAB && git pull --ff-only origin lab                                     # -> d350330
+sha256sum tasks/20261023-gr17p1-cram/TASK.md                                 # 0eb15cb3...
+(cd tasks/20261023-gr17p1-cram && sha256sum -c MANIFEST.sha256)              # 16 files OK
+systemctl list-timers --all 'apt-daily*'                                     # see RESULT.md (both ACTIVE; NEXT 17:54 CST / tomorrow)
+systemctl is-active apt-daily.service apt-daily-upgrade.service              # inactive inactive
+
+# step 0: checkouts verified (both clean), then setup
+git -C ~/l/w17-cram/ub16 rev-parse HEAD                                      # 46285269e15c18276d20168ccb063f80c0e2bf42
+git -C ~/l/w17-cram/w17  rev-parse HEAD                                      # 1e9acb3a2421ed8e33591fa61d37b893d6521579
+python3 $LAB/tasks/20261023-gr17p1-cram/setup_data.py \
+    $LAB/tasks/20261023-gr17p1-cram ~/l/w17-cram/ub16 ~/l/w17-cram/w17 \
+    $LAB/results/20261023-gr17p1-build ~/l/gr17p1-cram/work                  # SETUP OK, pool 25,075,790
+
+# section 4 environment
+python3 --version && python3 -c "import numpy, scapy, serial"                # 3.10.12 ok
+ls -la /dev/ttyACM0; ip -4 addr show enp4s0; getcap /usr/bin/python3.10      # cap_net_raw=ep
+sysctl net.core.rmem_max                                                     # 212992 -> (author) sudo sysctl -w net.core.rmem_max=33554432 -> 33554432
+nohup /tools/Xilinx/Vivado/2018.3/bin/vivado .../hw_server &                   # hw_server was not running after today's boot; restarted (2018.3, :3121)
+
+# step 0b: bit-identical check on the lab board
+mkdir -p ~/l/gr17p1-cram/check0
+cd ~/l/w17-cram/w17 && python3 -B chain/host/bare_chain_run.py \
+    --bit ~/l/gr17p1-cram/work/arm/k7_udp_ddr_top.bit --port /dev/ttyACM0 \
+    --vivado /tools/Xilinx/Vivado/2018.3/bin/vivado --point 2 --gf3 2 \
+    --tag gr17p1_lab --save-readback --out-dir ~/l/gr17p1-cram/check0 \
+    > ~/l/gr17p1-cram/check0/gr17p1_lab.console.log 2>&1                     # rc=0, PASS
+grep -c "programming again" ~/l/gr17p1-cram/check0/gr17p1_lab.console.log    # 0
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -nolog \
+    -source $LAB/tasks/20261023-gr17p1-cram/read_usr_access.tcl \
+    > ~/l/gr17p1-cram/check0/usr_access.log 2>&1                             # K7_USR_ACCESS bd341ba8
+sha256sum ~/l/gr17p1-cram/check0/bare_chain_run_gr17p1_lab_*_frame*.bin \
+    > ~/l/gr17p1-cram/check0/frames.sha256
+
+# steps 1-4: no-fault check -> campaign (point 1200 + control 60) -> no-fault check -> summary
+cd ~/l/gr17p1-cram && PORT=/dev/ttyACM0 VIVADO=/tools/Xilinx/Vivado/2018.3/bin/vivado \
+nohup bash $LAB/tasks/20261023-gr17p1-cram/run_gr17p1_cram.sh \
+    ~/l/w17-cram/ub16 ~/l/w17-cram/w17 ~/l/gr17p1-cram/work \
+    $LAB/results/20261023-gr17p1-cram > ~/l/gr17p1-cram/run_gr17p1_cram.nohup.log 2>&1 &
+#   03:55:50 pre-check PASS (retries 0); campaign 03:55:50-08:39:15; 08:41:09 post-check PASS / DONE
+
+# step 5: read-only tile lookup against the routed checkpoint
+D=/home/xdu/l/gr17p1/chain/build/snap/GR17P1/build/vivado/PROT_GR17P1/PROT_GR17P1.runs/impl_1/k7_udp_ddr_top_routed.dcp
+sha256sum $D                                                                 # eed7f01c080fb9e9565044c269b9117ba44ca92d66d36cf4c46c04bef34e3f86 == required
+cd $LAB/results/20261023-gr17p1-cram && mkdir -p lookup && cd lookup
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -log lookup.log \
+    -source $LAB/tasks/20261023-gr17p1-cram/tile_lookup.tcl \
+    -tclargs $D ../summary/shots.csv lookup.tsv                              # TILE_LOOKUP done: 16 shots
+rm -rf .Xil hd_visual                                                        # scratch dirs from this run only
+
+# delivery
+cp ~/l/gr17p1-cram/check0/{bare_chain_run_gr17p1_lab.json,gr17p1_lab.console.log,usr_access.log,frames.sha256} $LAB/results/20261023-gr17p1-cram/check0/
+cd $LAB/results/20261023-gr17p1-cram && find . -type f ! -name MANIFEST.sha256 | sort | xargs sha256sum > MANIFEST.sha256
+cd $LAB && git add results/20261023-gr17p1-cram && git commit && git push origin lab

@@ -1,0 +1,24 @@
+
+****** Vivado v2018.3 (64-bit)
+  **** SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
+  **** IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source /home/xdu/JuWade_research/2048-2048cs-k7-sem_low/tasks/20261022-gr17m2-cram/read_usr_access.tcl
+# open_hw
+# connect_hw_server
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+# open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/H20026FBDFE8
+# set devices [get_hw_devices -filter {PART == xc7k325t}]
+# if {[llength $devices] != 1} {error "expected exactly one xc7k325t"}
+# set device [lindex $devices 0]
+# current_hw_device $device
+# refresh_hw_device -update_hw_probes false $device
+INFO: [Labtools 27-1434] Device xc7k325t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+# puts "K7_USR_ACCESS [get_property REGISTER.USR_ACCESS $device]"
+K7_USR_ACCESS b534b18b
+# catch { close_hw_target }
+INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Digilent/H20026FBDFE8
+# catch { disconnect_hw_server }
+INFO: [Common 17-206] Exiting Vivado at Thu Oct 22 12:09:21 2026...

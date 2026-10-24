@@ -1,0 +1,45 @@
+{
+ "ts": "2026-10-21T13:02:50.028124",
+ "batches": {
+  "e0_point": {
+   "records": 1200,
+   "valid": 1200,
+   "outcomes": {
+    "MASKED": 1134,
+    "SDC": 63,
+    "DUE": 3,
+    "no_outcome": 0
+   },
+   "levels": {
+    "identical": 1134,
+    "changed": 59,
+    "below_line": 4
+   },
+   "below_line_ci95": [
+    0.0013,
+    0.0085
+   ],
+   "invalid_sem": 0,
+   "invalid_no_detect": 0
+  },
+  "control": {
+   "records": 60,
+   "valid": 56,
+   "outcomes": {
+    "MASKED": 56,
+    "SDC": 0,
+    "DUE": 0,
+    "no_outcome": 0
+   },
+   "levels": {
+    "identical": 56
+   },
+   "below_line_ci95": [
+    0.0,
+    0.0642
+   ],
+   "invalid_sem": 0,
+   "invalid_no_detect": 4
+  }
+ }
+}

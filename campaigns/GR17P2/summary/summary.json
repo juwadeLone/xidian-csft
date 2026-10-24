@@ -1,0 +1,100 @@
+{
+ "camp": "/home/xdu/JuWade_research/2048-2048cs-k7-sem_low/results/20261022-gr17p2-cram/camp/GR17P2_20261022",
+ "pool": 27481825,
+ "batches": {
+  "e0_point": {
+   "records": 1200,
+   "identical": 1121,
+   "changed": 62,
+   "DUE": 11,
+   "below_line": 6,
+   "valid": 1200,
+   "sem_uncorrectable_after": [
+    42,
+    106
+   ],
+   "invalid_shots": []
+  },
+  "control": {
+   "records": 60,
+   "identical": 53,
+   "invalid": 7,
+   "valid": 53,
+   "sem_uncorrectable_after": [],
+   "invalid_shots": [
+    [
+     4,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     8,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     16,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     19,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     35,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     36,
+     "INVALID_NO_DETECT"
+    ],
+    [
+     40,
+     "INVALID_NO_DETECT"
+    ]
+   ]
+  }
+ },
+ "rates": {
+  "below_line": {
+   "k": 6,
+   "n": 1200,
+   "share": 0.005,
+   "share_ci": [
+    0.0022934678730786064,
+    0.010865738454398362
+   ],
+   "xsec": 137409.125,
+   "xsec_ci": [
+    63028.682731068475,
+    298610.3226995463
+   ]
+  },
+  "DUE": {
+   "k": 11,
+   "n": 1200,
+   "share": 0.009166666666666667,
+   "share_ci": [
+    0.005126095138295158,
+    0.01633985187666096
+   ],
+   "xsec": 251916.72916666666,
+   "xsec_ci": [
+    140874.44952397834,
+    449048.9498003181
+   ]
+  },
+  "changed": {
+   "k": 62,
+   "n": 1200,
+   "share": 0.051666666666666666,
+   "share_ci": [
+    0.04051153554111717,
+    0.06568316648612628
+   ],
+   "xsec": 1419894.2916666667,
+   "xsec_ci": [
+    1113330.9302222624,
+    1805093.2868175874
+   ]
+  }
+ }
+}

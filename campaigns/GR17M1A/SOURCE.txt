@@ -1,0 +1,19 @@
+lab branch checkout: /home/xdu/JuWade_research/2048-2048cs-k7-sem_low @ 8169afd
+task card: tasks/20261023-gr17m1a-lookup/TASK.md (commit a664c13)
+  (all 3 task-dir files verified against tasks/20261023-gr17m1a-lookup/MANIFEST.sha256)
+script: tasks/20261023-gr17m1a-lookup/tile_lookup.tcl sha256 ef16526f88d09d65...
+  byte-identical to the per-campaign step-5 lookup script
+shot list: shots_gr17m1a.csv — 18 shots from the local GR17M1A_20261023 campaign
+  (161, 344, 355, 359, 427, 447, 647, 709, 746, 771, 848, 879, 985, 1076, 1094, 1104, 1179, 1180)
+  CRLF->LF only; original sha256-pref16 69568a42f00fdd5c, this copy 2735946b787ce330
+
+device under test: build label GR17M1A, code branch gr17m1a @ b868c86
+  bitstream sha256 49a8bfabf5b1ed2b07e8a8393cdd89b351a2026cdc37ad5ea8499c4be9284a0a
+  build evidence: results/20261023-gr17m1a-build/
+
+routed checkpoint (opened read-only; measured sha256 matched):
+  /home/xdu/l/gr17m1a/chain/build/snap/GR17M1A/build/vivado/PROT_GR17M1A/PROT_GR17M1A.runs/impl_1/k7_udp_ddr_top_routed.dcp
+  sha256 5275468cfdfb369b8f3d2900a39661d684d125106e947d89b279a0424ad83fec
+
+tool: Vivado v2018.3 (64-bit) build 2405991, /tools/Xilinx/Vivado/2018.3/bin/vivado
+run in the same window as results/20261023-above-line-lookup and results/20261023-final-bits (all read-only)

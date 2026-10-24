@@ -1,0 +1,56 @@
+# Commands for task 20261021-gr17-cram (corrected build, D400/D415)
+# LAB = /home/xdu/JuWade_research/2048-2048cs-k7-sem_low ; S = /home/xdu/l/gr17fix-cram
+
+# --- acquire task card ---
+cd $LAB && GIT_SSH_COMMAND='ssh -o ProxyCommand="nc -X 5 -x 127.0.0.1:12000 %h %p" -p 443 -o HostName=ssh.github.com' \
+  git pull --rebase origin lab          # -> b80b0ab
+sha256sum tasks/20261021-gr17-cram/TASK.md
+# 54c23f03fba3ecadede5456832b45905c0e9bb9720a56d2ff2f04a37d98f06ae
+
+# --- §4 environment checks ---
+sysctl -n net.core.rmem_max             # 33554432 before AND after (already at target)
+python3 --version && python3 -c "import numpy, scapy, serial"
+ls -l /dev/ttyACM0 && ip -4 addr show enp4s0
+systemctl list-timers apt-daily-upgrade.timer
+/tools/Xilinx/Vivado/2018.3/bin/vivado -version
+
+# --- §0: verify checkouts + setup ---
+git -C ~/l/w17-cram/ub16 rev-parse HEAD   # 46285269e15c18276d20168ccb063f80c0e2bf42
+git -C ~/l/w17-cram/w17  rev-parse HEAD   # 1e9acb3a2421ed8e33591fa61d37b893d6521579
+mkdir -p $S/work
+python3 $LAB/tasks/20261021-gr17-cram/setup_data.py \
+  $LAB/tasks/20261021-gr17-cram ~/l/w17-cram/ub16 ~/l/w17-cram/w17 \
+  $LAB/results/20261021-gr17-fix $S/work        # SETUP OK, pool 23,859,950
+
+# --- §0b bit-consistency check (gate; passed -> injection allowed) ---
+mkdir -p $S/check0
+cd ~/l/w17-cram/w17 && python3 -B chain/host/bare_chain_run.py \
+  --bit $S/work/arm/k7_udp_ddr_top.bit --port /dev/ttyACM0 \
+  --vivado /tools/Xilinx/Vivado/2018.3/bin/vivado --point 2 --gf3 2 \
+  --tag gr17_lab --save-readback --out-dir $S/check0 \
+  > $S/check0/gr17_lab.console.log 2>&1; echo "rc=$?"   # rc=0
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -nolog \
+  -source $LAB/tasks/20261021-gr17-cram/read_usr_access.tcl > $S/check0/usr_access.log 2>&1
+grep "^K7_USR_ACCESS " $S/check0/usr_access.log         # ad341b6b
+sha256sum $S/check0/bare_chain_run_gr17_lab_*_frame*.bin > $S/check0/frames.sha256
+
+# --- §1-4 campaign (nohup): pre-check -> e0 1200 + control 60 -> post-check -> summary ---
+mkdir -p $LAB/results/20261021-gr17fix-cram
+cd $S && PORT=/dev/ttyACM0 VIVADO=/tools/Xilinx/Vivado/2018.3/bin/vivado \
+nohup bash $LAB/tasks/20261021-gr17-cram/run_gr17_cram.sh \
+  ~/l/w17-cram/ub16 ~/l/w17-cram/w17 $S/work \
+  $LAB/results/20261021-gr17fix-cram > $S/run_gr17_cram.nohup.log 2>&1 &
+
+# --- §5 read-only tile lookup ---
+D=/home/xdu/l/gr17/chain/build/snap/GR17/build/vivado/PROT_GR17/PROT_GR17.runs/impl_1/k7_udp_ddr_top_routed.dcp
+sha256sum $D   # e40e8070555af4cb7e8ca05c0293f74ca76be6a9fa8ee29590c2dd68bfdaf772
+cd $LAB/results/20261021-gr17fix-cram && mkdir -p lookup && cd lookup
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -log lookup.log \
+  -source $LAB/tasks/20261021-gr17-cram/tile_lookup.tcl -tclargs $D ../summary/shots.csv lookup.tsv
+
+# --- package ---
+cp $S/check0/bare_chain_run_gr17_lab.json $S/check0/gr17_lab.console.log \
+   $S/check0/usr_access.log $S/check0/frames.sha256 $LAB/results/20261021-gr17fix-cram/check0/
+cp $S/run_gr17_cram.nohup.log $LAB/results/20261021-gr17fix-cram/nohup.log
+rm -rf $LAB/results/20261021-gr17fix-cram/camp/GR17_20261021/.Xil   # vivado scratch, not evidence
+cd $LAB/results/20261021-gr17fix-cram && find . -type f ! -name MANIFEST.sha256 -exec sha256sum {} + | sort -k2 > MANIFEST.sha256

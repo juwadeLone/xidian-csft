@@ -1,0 +1,18 @@
+W17 CRAM campaign provenance
+============================
+
+ub16 worktree : /home/xdu/l/w17-cram/ub16 @ 46285269e15c18276d20168ccb063f80c0e2bf42
+                (git status --short: clean; host scripts + runner)
+w17 worktree  : /home/xdu/l/w17-cram/w17  @ 1e9acb3a2421ed8e33591fa61d37b893d6521579
+                (git status --short: clean; build inputs)
+lab repo      : 2048-2048cs-k7-sem_low, branch lab (this directory)
+
+Bitstream     : k7_udp_ddr_top.bit  SHA-256 02800d91386d3adf168f5f191cc56588be6a6dac913fc476f358053c23412e9c
+                (W17 build, USR_ACCESS a53503e8 — readback 18:20 local)
+Routed dcp    : 948ec7a212d9c1a28d8a1e40270d81271399aa66a282cafea83ea6fc9a37dc0a
+                (verified before the read-only lookup, per TASK §5)
+Vectors       : chain/sim/vectors/manifest.json SHA-256 43463aab09a4b2c8989813520a18cd1af204e471daf5...
+
+Tool          : Vivado 2018.3 (SW Build 2405991), hw_server localhost:3121
+Machine       : cmp, Ubuntu 22.04.5, kernel 6.8.0-136, Python 3.10.12
+Window (UTC)  : 2026-10-20 10:18:57 .. 15:35:41 (checks + 1260 shots)

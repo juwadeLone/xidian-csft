@@ -1,0 +1,15 @@
+# 20261023-gr17m1a-lookup -- commands actually run (host cmp; LAB=/home/xdu/JuWade_research/2048-2048cs-k7-sem_low)
+cd $LAB && git pull --ff-only origin lab                                     # -> 8169afd (contains a664c13)
+(cd tasks/20261023-gr17m1a-lookup && sha256sum -c MANIFEST.sha256)           # 3 files OK
+
+D=/home/xdu/l/gr17m1a/chain/build/snap/GR17M1A/build/vivado/PROT_GR17M1A/PROT_GR17M1A.runs/impl_1/k7_udp_ddr_top_routed.dcp
+sha256sum $D                                                                 # 5275468cfdfb369b8f3d2900a39661d684d125106e947d89b279a0424ad83fec == required
+
+mkdir -p $LAB/results/20261023-gr17m1a-lookup && cd $LAB/results/20261023-gr17m1a-lookup
+/tools/Xilinx/Vivado/2018.3/bin/vivado -mode batch -nojournal -log lookup.log \
+  -source $LAB/tasks/20261023-gr17m1a-lookup/tile_lookup.tcl \
+  -tclargs $D $LAB/tasks/20261023-gr17m1a-lookup/shots_gr17m1a.csv lookup.tsv  # TILE_LOOKUP done: 18 shots
+
+rm -rf hd_visual .Xil                                                        # scratch dirs from this run only
+find . -type f ! -name MANIFEST.sha256 | sort | xargs sha256sum > MANIFEST.sha256
+cd $LAB && git add results/20261023-gr17m1a-lookup && git commit && git push origin lab

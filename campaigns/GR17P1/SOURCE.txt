@@ -1,0 +1,35 @@
+lab branch checkout: /home/xdu/JuWade_research/2048-2048cs-k7-sem_low @ d350330
+task card: tasks/20261023-gr17p1-cram/TASK.md
+  sha256 0eb15cb3501ddf62473e3871bd24c4dff3943cb957ebe5f128c3675812ac3497
+  (all 16 task-dir files verified against tasks/20261023-gr17p1-cram/MANIFEST.sha256)
+
+device under test: build label GR17P1 from code branch gr17p1 @ d42e7c3
+  build evidence: results/20261023-gr17p1-build/ (lab @ 9955632)
+  bitstream: chain/build/arms/GR17P1/k7_udp_ddr_top.bit
+    sha256 7ff8c411d0abe5570113c2e411e370409f5a4ab86e68a072f8c2ab96ee719750
+  ebd (decompressed): sha256 b06c53cd3c8eeb40855b375fced6bd8a38fb78cac4d8ce456927918935933e82
+  USR_ACCESS bd341ba8 ; PROT_VEC_ID 41b285e2 (not readable on board)
+
+checkouts used (read-only, verified clean):
+  injection program: /home/xdu/l/w17-cram/ub16 @ 46285269e15c18276d20168ccb063f80c0e2bf42
+    git status --short: (empty)
+  no-fault runner + gold frames: /home/xdu/l/w17-cram/w17 @ 1e9acb3a2421ed8e33591fa61d37b893d6521579
+    git status --short: (empty)
+
+targets (sampled on this host, shipped with the task):
+  targets_e0.json      sha256 f1d2fc72e4569cab...  1,200 uniform samples, point scene
+  targets_control.json sha256 be1e3ce3e77ad92b...  60 non-essential bits
+  SAMPLE_MANIFEST.json: pool 25,075,790 bits; 0 targets in the 110 reserved columns;
+    ebd b06c53cd..., zone_frames.json 7e1324a4..., zone_check.json e877719a...,
+    frame_table_k7_crfix.json ad8d8799...
+
+work dir (not pushed): /home/xdu/l/gr17p1-cram
+  work/arm/{k7_udp_ddr_top.bit,k7_udp_ddr_top.ebd}, work/golden_w17_*.bin, work/targets/
+  check0/: 4 raw readback frames left on disk (32 MB each)
+
+routed checkpoint for step 5 (left on the lab machine, opened read-only):
+  /home/xdu/l/gr17p1/chain/build/snap/GR17P1/build/vivado/PROT_GR17P1/PROT_GR17P1.runs/impl_1/k7_udp_ddr_top_routed.dcp
+  sha256 eed7f01c080fb9e9565044c269b9117ba44ca92d66d36cf4c46c04bef34e3f86
+
+tool: Vivado v2018.3 (64-bit) build 2405991, /tools/Xilinx/Vivado/2018.3/bin/vivado
+      hw_server 2018.3 on localhost:3121, hw_target Digilent H20026FBDFE8

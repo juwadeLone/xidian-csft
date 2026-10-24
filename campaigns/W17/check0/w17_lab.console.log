@@ -1,0 +1,101 @@
+JTAG program /home/xdu/l/w17-cram/work/arm/k7_udp_ddr_top.bit
+
+****** Vivado v2018.3 (64-bit)
+  **** SW Build 2405991 on Thu Dec  6 23:36:41 MST 2018
+  **** IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
+    ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+
+source /home/xdu/l/w17-cram/w17/chain/host/vivado/program_k7_volatile.tcl
+# if {$argc != 1} {error "usage: -tclargs bitfile"}
+# set bitfile [file normalize [lindex $argv 0]]
+# if {![file exists $bitfile]} {error "missing bitfile: $bitfile"}
+# open_hw
+# connect_hw_server
+INFO: [Labtools 27-2285] Connecting to hw_server url TCP:localhost:3121
+# open_hw_target
+INFO: [Labtoolstcl 44-466] Opening hw_target localhost:3121/xilinx_tcf/Digilent/H20026FBDFE8
+# set devices [get_hw_devices -filter {PART == xc7k325t}]
+# if {[llength $devices] != 1} {error "expected exactly one xc7k325t"}
+# set device [lindex $devices 0]
+# current_hw_device $device
+# set_property PROGRAM.FILE $bitfile $device
+# program_hw_devices $device
+INFO: [Labtools 27-3164] End of startup status: HIGH
+# refresh_hw_device $device
+INFO: [Labtools 27-1434] Device xc7k325t (JTAG device index = 0) is programmed with a design that has no supported debug core(s) in it.
+# puts "K7_VOLATILE_PROGRAMMED device=$device bitfile=$bitfile"
+K7_VOLATILE_PROGRAMMED device=xc7k325t_0 bitfile=/home/xdu/l/w17-cram/work/arm/k7_udp_ddr_top.bit
+# catch { close_hw_target }
+INFO: [Labtoolstcl 44-464] Closing hw_target localhost:3121/xilinx_tcf/Digilent/H20026FBDFE8
+# catch { disconnect_hw_server }
+INFO: [Common 17-206] Exiting Vivado at Tue Oct 20 18:19:04 2026...
+UART 打开 /dev/ttyACM0 @115200
+UDP 监听 0.0.0.0:8080
+网口 enp4s0 ip=192.168.1.100 mac=10:ff:e0:3b:35:0a
+UART WR_ACK seq=1 addr=201326592 len=16
+UART CS_PARAM_ACK seq=2 addr=1301214146 len=1287888929
+UART CS_PARAM_ACK seq=3 addr=1172270983 len=1087688300
+UART CS_PARAM_ACK seq=4 addr=1229856848 len=1068264633
+UART CS_PARAM_ACK seq=5 addr=1727056649 len=3204112437
+UART CS_PARAM_ACK seq=6 addr=320623684 len=0
+UART CS_RB_ACK seq=7 addr=0 len=12
+UART CS_RB_ACK seq=8 addr=1 len=12
+UART CS_RB_ACK seq=9 addr=2 len=12
+UART CS_RB_ACK seq=10 addr=3 len=12
+UART CS_RB_ACK seq=11 addr=4 len=12
+identity: PROT_VEC_ID 00000000 USR_ACCESS 00000000 repair_cycles 0  no protection-flag words in this build
+UART WR_ACK seq=12 addr=0 len=33554432
+UART RD_ACK seq=13 addr=0 len=33554432
+UART CS_PARAM_ACK seq=14 addr=1301214146 len=1287888929
+UART RD_ACK seq=15 addr=134217728 len=33554432
+UART CS_RB_ACK seq=16 addr=0 len=12
+UART CS_RB_ACK seq=17 addr=1 len=12
+UART CS_RB_ACK seq=18 addr=2 len=12
+UART CS_RB_ACK seq=19 addr=3 len=12
+UART CS_RB_ACK seq=20 addr=4 len=12
+UART CS_RB_ACK seq=21 addr=8 len=12
+UART CS_RB_ACK seq=22 addr=9 len=12
+point frame 0: readback saved /home/xdu/l/w17-cram/check0/bare_chain_run_w17_lab_point_frame0.bin sha256 79ca5c05a217e6e0be684ffd2d8a23a325ce909bb3cf6f40d157f2c510a0056c
+point frame 0: PASS == frozen  out_sha256 79ca5c05a217e6e0be684ffd2d8a23a325ce909bb3cf6f40d157f2c510a0056c  flags[no protection-flag words in this build]  frame[overflow none, fold 0000577600005aad == read-back, completed]  (write 4.9 s in 1 attempt(s), run 1.2 s, read 0.9 s)
+UART WR_ACK seq=23 addr=0 len=33554432
+UART RD_ACK seq=24 addr=0 len=33554432
+UART CS_PARAM_ACK seq=25 addr=1301214146 len=1287888929
+UART RD_ACK seq=26 addr=134217728 len=33554432
+UART CS_RB_ACK seq=27 addr=0 len=12
+UART CS_RB_ACK seq=28 addr=1 len=12
+UART CS_RB_ACK seq=29 addr=2 len=12
+UART CS_RB_ACK seq=30 addr=3 len=12
+UART CS_RB_ACK seq=31 addr=4 len=12
+UART CS_RB_ACK seq=32 addr=8 len=12
+UART CS_RB_ACK seq=33 addr=9 len=12
+point frame 1: readback saved /home/xdu/l/w17-cram/check0/bare_chain_run_w17_lab_point_frame1.bin sha256 79ca5c05a217e6e0be684ffd2d8a23a325ce909bb3cf6f40d157f2c510a0056c
+point frame 1: PASS == frozen  out_sha256 79ca5c05a217e6e0be684ffd2d8a23a325ce909bb3cf6f40d157f2c510a0056c  flags[no protection-flag words in this build]  frame[overflow none, fold 0000577600005aad == read-back, completed]  (write 4.9 s in 1 attempt(s), run 0.9 s, read 0.9 s)
+UART WR_ACK seq=34 addr=0 len=33554432
+UART RD_ACK seq=35 addr=0 len=33554432
+UART CS_PARAM_ACK seq=36 addr=1301214146 len=1287888929
+UART RD_ACK seq=37 addr=134217728 len=33554432
+UART CS_RB_ACK seq=38 addr=0 len=12
+UART CS_RB_ACK seq=39 addr=1 len=12
+UART CS_RB_ACK seq=40 addr=2 len=12
+UART CS_RB_ACK seq=41 addr=3 len=12
+UART CS_RB_ACK seq=42 addr=4 len=12
+UART CS_RB_ACK seq=43 addr=8 len=12
+UART CS_RB_ACK seq=44 addr=9 len=12
+gf3 frame 0: readback saved /home/xdu/l/w17-cram/check0/bare_chain_run_w17_lab_gf3_frame0.bin sha256 3a794a1ad520ff8f8fca00634e6ca474e9b3dd11480b5d595a0c437ff4948d86
+gf3 frame 0: PASS == frozen  out_sha256 3a794a1ad520ff8f8fca00634e6ca474e9b3dd11480b5d595a0c437ff4948d86  flags[no protection-flag words in this build]  frame[overflow none, fold 00002ca30000284a == read-back, completed]  (write 4.9 s in 1 attempt(s), run 0.9 s, read 0.9 s)
+UART WR_ACK seq=45 addr=0 len=33554432
+UART RD_ACK seq=46 addr=0 len=33554432
+UART CS_PARAM_ACK seq=47 addr=1301214146 len=1287888929
+UART RD_ACK seq=48 addr=134217728 len=33554432
+UART CS_RB_ACK seq=49 addr=0 len=12
+UART CS_RB_ACK seq=50 addr=1 len=12
+UART CS_RB_ACK seq=51 addr=2 len=12
+UART CS_RB_ACK seq=52 addr=3 len=12
+UART CS_RB_ACK seq=53 addr=4 len=12
+UART CS_RB_ACK seq=54 addr=8 len=12
+UART CS_RB_ACK seq=55 addr=9 len=12
+gf3 frame 1: readback saved /home/xdu/l/w17-cram/check0/bare_chain_run_w17_lab_gf3_frame1.bin sha256 3a794a1ad520ff8f8fca00634e6ca474e9b3dd11480b5d595a0c437ff4948d86
+gf3 frame 1: PASS == frozen  out_sha256 3a794a1ad520ff8f8fca00634e6ca474e9b3dd11480b5d595a0c437ff4948d86  flags[no protection-flag words in this build]  frame[overflow none, fold 00002ca30000284a == read-back, completed]  (write 4.9 s in 1 attempt(s), run 0.9 s, read 0.9 s)
+PASS: 2 point + 2 GF-3 frame(s) equal the frozen SHA-256
+UART 已关闭
+UDP 已关闭
